@@ -15,14 +15,16 @@ public class TicTacToe {
         int curRowMove = 1;
         int curColMove = 1;
 
-        do {
+        do { // Main game loop
+            // Reset game
             clearBoard();
             System.out.println();
             player = "O";
             gameOver = false;
             moves = 0;
 
-            do {
+            do { // Individual round loop
+                // Swap players
                 if (player == "O") {
                     player = "X";
                 } else {
@@ -30,12 +32,10 @@ public class TicTacToe {
                 }
 
                 System.out.println("---   Player " + player + "   ---");
-
                 display();
-
                 moveSuccess = false;
 
-                do {
+                do { // Prompt for moves until successful
                     curRowMove = SafeInput.getRangedInt(in, "Please enter the row of your move", 1, ROWS) - 1;
                     curColMove = SafeInput.getRangedInt(in, "Please enter the column of your move", 1, COLS) - 1;
                     if (isValidMove(curRowMove, curColMove)) {
@@ -49,6 +49,7 @@ public class TicTacToe {
 
                 System.out.println("");
 
+                // Check if round continues
                 if (isWin(player)) {
                     System.out.println("---              ---");
                     System.out.println("");
@@ -64,6 +65,7 @@ public class TicTacToe {
 
             display();
 
+            // Prompt to play again
             done = !(SafeInput.getYNConfirm(in, "Player X: Continue? [Y/N]") && SafeInput.getYNConfirm(in, "Player O: Continue? [Y/N]"));
         } while (!done);
     }
